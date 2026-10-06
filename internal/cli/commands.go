@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"os"
 	"regexp"
+	"runtime/debug"
 	"strconv"
 	"strings"
 	"time"
@@ -16,6 +17,13 @@ import (
 )
 
 var Version = "dev"
+
+func init() {
+	// go install sets the module version; ldflags (-X) can still override.
+	if bi, ok := debug.ReadBuildInfo(); ok && Version == "dev" && bi.Main.Version != "" && bi.Main.Version != "(devel)" {
+		Version = bi.Main.Version
+	}
+}
 
 type globals struct {
 	profile string
