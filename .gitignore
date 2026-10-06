@@ -1,0 +1,6 @@
+bin/
+legacy/
+.env
+.env.*
+*.local.json
+.DS_Store
